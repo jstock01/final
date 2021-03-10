@@ -65,8 +65,9 @@ firebase.auth().onAuthStateChanged(async function(user) {
         let prayerId = docRef.id
         renderPrayer(userId, prayerId, username, title, description, completed, created)
       })
-
-        let getPrayers = await db.collection('prayers').orderBy('created', "desc").get()
+        
+        let currentUserId = firebase.auth().currentUser.uid
+        let getPrayers = await db.collection('prayers').where('userId', '==', currentUserId).orderBy('created', "desc").get()
         let prayers = getPrayers.docs
         for (let i=0; i<prayers.length; i++) {
             let prayerId = prayers[i].id
@@ -80,7 +81,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
             renderPrayer(userId, prayerId, username, title, description, completed, created)
         }
         //^ netlify this
-
+    
     } else {
       console.log('signed out')
   
@@ -98,6 +99,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 })
 
 async function renderPrayer(userId, prayerId, username, title, description, completed, created) {
+    let date = created.toDate().toDateString()
     document.querySelector('.render-prayers').insertAdjacentHTML('beforeend', `
         <div class="prayer-${prayerId} md:mt-16 mt-8 space-y-8">
             <div class="md:mx-0 mx-4">
@@ -105,7 +107,7 @@ async function renderPrayer(userId, prayerId, username, title, description, comp
             </div>
 
             <div>
-                <span class="text-m black">Prayer request submitted ${created}</span>
+                <span class="text-m black">Prayer request submitted ${date}</span>
             </div>
 
             <div>
@@ -119,7 +121,6 @@ async function renderPrayer(userId, prayerId, username, title, description, comp
             </div>
         </div>
     `)
-    //^ need to make timestamp render in a way that makes sense
 
     document.querySelector(`.prayer-${prayerId} .completed-button`).addEventListener('click', async function(event) {
         event.preventDefault()
@@ -138,7 +139,9 @@ async function renderPrayer(userId, prayerId, username, title, description, comp
     document.querySelector(`.prayer-${prayerId} .delete-button`).addEventListener('click', async function(event) {
         event.preventDefault()
         await db.collection('prayers').doc(prayerId).delete()
+        document.querySelector(`.prayer-${prayerId}`).classList.add("hidden")
         console.log(`prayer ${prayerId} deleted`)
+
     })
     
     document.querySelector(`.prayer-${prayerId} .edit-button`).addEventListener('click', async function(event) {

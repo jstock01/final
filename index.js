@@ -18,7 +18,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
     document.querySelector('.navigation-buttons').innerHTML = `
       <button class="text-blue-500 underline abide-daily">Abide Daily</button>
-      <button class="text-blue-500 underline pray-humbly">Pray humbly</button>
+      <button class="text-blue-500 underline pray-humbly">Pray Humbly</button>
     `
     //^^ need to add pictures and pretty formatting to buttons
 
