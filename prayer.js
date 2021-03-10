@@ -66,21 +66,33 @@ firebase.auth().onAuthStateChanged(async function(user) {
         renderPrayer(userId, prayerId, username, title, description, completed, created)
       })
         
-        let currentUserId = firebase.auth().currentUser.uid
-        let getPrayers = await db.collection('prayers').where('userId', '==', currentUserId).orderBy('created', "desc").get()
-        let prayers = getPrayers.docs
-        for (let i=0; i<prayers.length; i++) {
-            let prayerId = prayers[i].id
-            let prayerData = prayers[i].data()
-            let userId = prayerData.userId
-            let username = prayerData.username
-            let title = prayerData.title
-            let description = prayerData.description
-            let completed = prayerData.completed
-            let created = prayerData.created
-            renderPrayer(userId, prayerId, username, title, description, completed, created)
-        }
-        //^ netlify this
+        let response = await fetch('/.netlify/functions/fetch_prayers', {
+          method: 'POST',
+          body: JSON.stringify({
+            userId: userId
+          })
+        })
+  
+        //let prayers = await response.json()
+        //console.log(prayers)
+        
+        // for (let i=0; i<prayers.length; i++)
+        //   let prayer = prayers[i]
+        //   renderPrayer(prayer.userId, prayer.prayerId, prayer.username, prayer.title, prayer.description, prayer.completed, prayer.created)
+        // let currentUserId = firebase.auth().currentUser.uid
+        // let getPrayers = await db.collection('prayers').where('userId', '==', currentUserId).orderBy('created', "desc").get()
+        // let prayers = getPrayers.docs
+        // for (let i=0; i<prayers.length; i++) {
+        //     let prayerId = prayers[i].id
+        //     let prayerData = prayers[i].data()
+        //     let userId = prayerData.userId
+        //     let username = prayerData.username
+        //     let title = prayerData.title
+        //     let description = prayerData.description
+        //     let completed = prayerData.completed
+        //     let created = prayerData.created
+        //     renderPrayer(userId, prayerId, username, title, description, completed, created)
+        // }
     
     } else {
       console.log('signed out')
