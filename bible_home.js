@@ -3,11 +3,6 @@ let db = firebase.firestore()
 firebase.auth().onAuthStateChanged(async function(user) {
     if (user) {
       console.log('signed in')
-    
-      // db.collection('users').doc(user.uid).set({
-      //   name: user.displayName,
-      //   email: user.email
-      // })
   
       document.querySelector('.sign-in-or-sign-out').innerHTML = `
         <div class="flex items-center">

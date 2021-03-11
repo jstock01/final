@@ -1,3 +1,7 @@
+ //BELOW: from fetch_prayers.js. two different ways of trying to get the userId required as condition for the pull
+    //let queryStringUserId = event.queryStringParameters.userId
+    //let currentUserId = firebase.auth().currentUser.uid
+ 
  //BELOW: 4 different failed attempts at Bible API (on bible_home)
 
       //1

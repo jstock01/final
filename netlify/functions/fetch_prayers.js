@@ -5,11 +5,6 @@ exports.handler = async function(event) {
     let db = firebase.firestore()
     
     let fetched_prayers = [] 
-
-  //let queryStringUserId = event.queryStringParameters.userId
-  
-  //let currentUserId = firebase.auth().currentUser.uid
-  //console.log(currentUserId)
   
     console.log(event)
 
