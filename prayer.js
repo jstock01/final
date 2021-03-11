@@ -100,6 +100,9 @@ firebase.auth().onAuthStateChanged(async function(user) {
     }
 })
 
+//the two functions below are IDENTICAL, EXCEPT one writes prayers "before end", the other "after begin"
+//BOTH need the date (which is funneled in as "created") to be fixed. it's coming in from firebase as a number for seconds and nanoseconds; previously the "toDate" thing I commented worked but it stopped and IDK why 
+
 async function renderPrayer(userId, prayerId, username, title, description, completed, created) {
   //    let date = created.toDate().toDateString()
       document.querySelector('.render-prayers').insertAdjacentHTML('beforeend', `
