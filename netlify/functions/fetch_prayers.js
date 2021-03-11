@@ -9,11 +9,14 @@ exports.handler = async function(event) {
   //let queryStringUserId = event.queryStringParameters.userId
   
   //let currentUserId = firebase.auth().currentUser.uid
+  //console.log(currentUserId)
   
+    console.log(event)
+
     let body = JSON.parse(event.body)
     let userId = body.userId
 
-  let getPrayers = await db.collection('prayers').where('userId', '==', userId).orderBy('created', "desc").get()
+  let getPrayers = await db.collection('prayers').where('userId', '==', userId).orderBy('created', 'desc').get()
   let prayers = getPrayers.docs
   
   for (let i=0; i<prayers.length; i++) {
