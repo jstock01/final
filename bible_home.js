@@ -33,9 +33,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
       document.querySelector('.bible-notes-link').addEventListener('click', function(event) {
         document.location.href = 'bible_notes.html'
-      })
-
-      
+      })  
 
       document.querySelector('form').addEventListener('submit', async function(event){
   
@@ -56,8 +54,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
         let verseOutput = await response.json()
         console.log(verseOutput)
         
-        //let passages = verseOutput.passages
-
         for (let i=0; i<verseOutput.passages.length;i++) {
           document.querySelector('.passage').insertAdjacentHTML('beforeend', `
             <div class="font-bold text-xl">${verseOutput.passage_meta[i].canonical}</div>

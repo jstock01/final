@@ -99,7 +99,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 //BOTH need the date (which is funneled in as "created") to be fixed. it's coming in from firebase as a number for seconds and nanoseconds; previously the "toDate" thing I commented worked but it stopped and IDK why 
 
 async function renderPrayer(userId, prayerId, username, title, description, completed, created) {
-  //    let date = created.toDate().toDateString()
+      //let date = created.toDate().toDateString()
       document.querySelector('.render-prayers').insertAdjacentHTML('beforeend', `
           <div class="prayer-${prayerId} md:mt-16 mt-8 space-y-8">
               <div class="md:mx-0 mx-4">
