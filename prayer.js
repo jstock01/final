@@ -6,9 +6,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       console.log('signed in')
   
       document.querySelector('.sign-in-or-sign-out').innerHTML = `
-        <div class="flex items-center">
-        <button class="text-pink-500 underline sign-out">Sign Out</button>
-        </div>
+        <button class="text-green-400 underline sign-out">Sign Out</button>
       `
       //^ needs to be more nicely formatted to fit in with header
   
@@ -19,7 +17,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       })
   
       document.querySelector('.navigation-buttons').innerHTML = `
-        <button class="text-blue-500 underline abide-daily">Abide Daily</button>
+        <button class="text-red-400 underline abide-daily">Abide Daily</button>
       `
       //^ need to add picture and make more nicely formatted to fit in with header
 
@@ -28,7 +26,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       })
   
       document.querySelector('.new-prayer-request').innerHTML = `
-        <button class="text-blue-500 font-bold text-2xl new-prayer-request-button">New Prayer +</button>
+        <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold text-3xl px-4 py-2 rounded-xl new-prayer-request-button">New Prayer +</button>
         </div>
       `
       //^ add formatting, border, plus sign icon?, etc.

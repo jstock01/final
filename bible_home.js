@@ -5,9 +5,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       console.log('signed in')
   
       document.querySelector('.sign-in-or-sign-out').innerHTML = `
-        <div class="flex items-center">
-        <button class="text-pink-500 underline sign-out">Sign Out</button>
-        </div>
+        <button class="text-green-400 underline sign-out">Sign Out</button>
       `
       //^^ needs to be more nicely formatted to fit in with header
   
@@ -18,13 +16,22 @@ firebase.auth().onAuthStateChanged(async function(user) {
       })
   
       document.querySelector('.navigation-buttons').innerHTML = `
-        <button class="text-blue-500 underline pray-humbly">Pray Humbly</button>
+      <button class="text-purple-400 underline pray-humbly mx-2">Pray Humbly</button>
       `
-      //^ need to add picture and be more nicely formatted to fit in with header
+  //^^ need to add pictures and pretty formatting to buttons
 
-      document.querySelector('.pray-humbly').addEventListener('click', function(event) {
-        document.location.href = 'prayer.html'
-      })
+    document.querySelector('.pray-humbly').addEventListener('click',function(event) {
+      document.location.href = 'prayer.html'
+    })
+
+    document.querySelector('.home-button').innerHTML = `
+    <button class="text-purple-400 underline press-home mx-2">Home</button>
+    `
+//^^ need to add pictures and pretty formatting to buttons
+
+  document.querySelector('.press-home').addEventListener('click',function(event) {
+    document.location.href = 'index.html'
+  })
 
       document.querySelector('.bible-notes').innerHTML = `
         <button class="text-blue-500 underline bible-notes-link">Bible Notes</button>
