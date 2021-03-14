@@ -32,7 +32,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       </div> 
     </div>  
         `
-    //^^ need to add pictures and pretty formatting to buttons
+    //^^ need to add pretty formatting to buttons
 
     document.querySelector('.abide-daily').addEventListener('click',function(event) {
       document.location.href = 'bible_home.html'
