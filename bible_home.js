@@ -19,14 +19,14 @@ firebase.auth().onAuthStateChanged(async function(user) {
       <button class="text-purple-400 underline pray-humbly mx-2">Pray Humbly</button>
       <p><img src="prayhumbly.png"></p>
       `
-  //^^ need to add pictures and pretty formatting to buttons
+  //^^ need to add pretty formatting to buttons
 
     document.querySelector('.pray-humbly').addEventListener('click',function(event) {
       document.location.href = 'prayer.html'
     })
 
     document.querySelector('.home-button').innerHTML = `
-    <button class="text-purple-400 underline press-home mx-2">Home</button>
+    <button class="text-purple-400 underline press-home mx-2 text-xl text-bold">Home</button>
     `
 //^^ need to add pictures and pretty formatting to buttons
 
@@ -35,10 +35,10 @@ firebase.auth().onAuthStateChanged(async function(user) {
   })
 
       document.querySelector('.bible-notes').innerHTML = `
-        <button class="text-blue-500 underline bible-notes-link">Bible Notes</button>
+        <button class="text-blue-500 underline bible-notes-link text-left">Bible Notes</button>
         <p><img src="abidedaily.png"></p>
       `
-      //^ need to add picture and be more nicely formatted to fit in with header
+      //^ need to be more nicely formatted to fit in with header
 
       document.querySelector('.bible-notes-link').addEventListener('click', function(event) {
         document.location.href = 'bible_notes.html'
