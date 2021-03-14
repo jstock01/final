@@ -17,6 +17,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
   
       document.querySelector('.navigation-buttons').innerHTML = `
       <button class="text-purple-400 underline pray-humbly mx-2">Pray Humbly</button>
+      <p><img src="prayhumbly.png"></p>
       `
   //^^ need to add pictures and pretty formatting to buttons
 
@@ -35,6 +36,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
       document.querySelector('.bible-notes').innerHTML = `
         <button class="text-blue-500 underline bible-notes-link">Bible Notes</button>
+        <p><img src="abidedaily.png"></p>
       `
       //^ need to add picture and be more nicely formatted to fit in with header
 
