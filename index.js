@@ -5,12 +5,12 @@ firebase.auth().onAuthStateChanged(async function(user) {
   if (user) {
     console.log('signed in')
 
-    document.querySelector('.sign-in-or-sign-out').innerHTML = `
-      <button class="text-green-400 underline sign-out">Sign Out</button>
+    document.querySelector('.sign-out').innerHTML = `
+      <button class="text-green-400 underline sign-out-button">Sign Out</button>
     `
     //^^ needs to be more nicely formatted to fit in with header
 
-    document.querySelector('.sign-out').addEventListener('click', function(event) {
+    document.querySelector('.sign-out-button').addEventListener('click', function(event) {
       console.log('sign out clicked')
       firebase.auth().signOut()
       document.location.href = 'index.html'
@@ -55,6 +55,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
       signInSuccessUrl: 'index.html'
     }
 
-    ui.start('.sign-in-or-sign-out', authUIConfig)
+    ui.start('.sign-in', authUIConfig)
   }
 })
