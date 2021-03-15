@@ -38,6 +38,16 @@
 
   <div class="passage"></div>
 
+  <div class="notes-submission-form hidden">
+      <form id="form2" class="w-full mt-2 text-center">
+          <input type="text" id="reference" name="reference" placeholder="Relevant verse references" class="my-2 p-2 w-64 border border-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 rounded-xl">     
+          <input type="text" id="note" name="note" placeholder="Notes on passage" class="my-2 p-2 w-64 border border-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 rounded-xl">
+          <button class="bg-blue-500 hover:bg-blue-300 text-white px-4 py-2 rounded-xl" id="notes-submit-button">Submit</button>
+      </form>
+  </div>
+
+  <div class="note-submitted-message"></div>
+
    <!-- Put the Firebase config here -->
   <!-- The core Firebase JS SDK is always required and must be listed first -->
   <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-app.js"></script>

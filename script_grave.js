@@ -1,3 +1,14 @@
+// BELOW: from when I tried using a netlify function to fetch_notes, in the bible_notes.js
+      // let response = await fetch('/.netlify/functions/fetch_notes', {
+      //   method: 'POST',
+      //   body: JSON.stringify({
+      //     userId: userId
+      //   })
+      // })
+
+      // let notes = await response.json()
+      // console.log(notes) 
+ 
  //BELOW: from fetch_prayers.js. two different ways of trying to get the userId required as condition for the pull
     //let queryStringUserId = event.queryStringParameters.userId
     //let currentUserId = firebase.auth().currentUser.uid

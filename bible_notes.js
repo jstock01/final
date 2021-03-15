@@ -21,8 +21,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       <button class="text-purple-400 underline pray-humbly mx-2"><img src="Prayer-Red.png"></button>
       <button class="text-purple-400 underline abide-daily mx-2"><img src="Bible-Red.png"></button>
       `
-    //^^ need to add pretty formatting to buttons
-
+    
       document.querySelector('.abide-daily').addEventListener('click',function(event) {
         document.location.href = 'bible_home.html'
       })
@@ -31,8 +30,24 @@ firebase.auth().onAuthStateChanged(async function(user) {
         document.location.href = 'prayer.html'
       })
 
+      let userId = user.uid
+      console.log(userId)
 
-      //need to add button to return to bible_home
+      let querySnapshot = await db.collection('notes').where('userId', '==', userId).orderBy('created', 'desc').get()
+      let notes = querySnapshot.docs
+      console.log(notes)
+      
+      for (let i=0; i<notes.length; i++) {
+        let noteId = notes[i].id
+        let note = notes[i].data()
+        let userId = note.userId
+        let username = note.username
+        let reference = note.reference
+        let noteContent = note.note
+        let created = note.created
+        console.log(`Note #${noteId} made by user #${userId} (${username}), on scripture ${reference}, saying ${noteContent}, created on ${created}`)
+        renderNote(userId, noteId, username, reference, noteContent, created)
+      }
 
     } else {
       // Signed out
@@ -53,4 +68,21 @@ firebase.auth().onAuthStateChanged(async function(user) {
       ui.start('.sign-in-or-sign-out', authUIConfig)
     }
   })
+
+async function renderNote(userId, noteId, username, reference, noteContent, created){
+  document.querySelector(".render-notes").insertAdjacentHTML('beforeend',`
+    <div class="note-${noteId} md:mt-16 mt-8 space-y-8">
+    <div class="md:mx-0 mx-4">
+        <span class="font-bold text-xl">${reference}</span>
+    </div>
+
+    <div>
+        <span class="text-m black">Prayer request submitted ${created}</span>
+    </div>
+
+    <div>
+        <span class="text-m black">${noteContent}</span>
+    </div>
+  `)
+}
   
