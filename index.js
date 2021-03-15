@@ -8,7 +8,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
     document.querySelector('.sign-out').innerHTML = `
       <button class="text-green-400 underline sign-out-button">Sign Out</button>
     `
-    //^^ needs to be more nicely formatted to fit in with header
 
     document.querySelector('.sign-out-button').addEventListener('click', function(event) {
       console.log('sign out clicked')
