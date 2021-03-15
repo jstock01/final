@@ -18,10 +18,22 @@ firebase.auth().onAuthStateChanged(async function(user) {
       })
   
         document.querySelector('.navigation-buttons').innerHTML = `
-        <button class="text-red-400 underline abide-daily mx-2">Abide Daily</button>
+        <div class="flex text-center">
+      <div class="md:flex m-4">
+        <div class="md:w-1/2 border-4 mx-4 text-center">
+         <button class="text-red-400 underline abide-daily mx-2">Abide Daily</button>
+         <p><img src="abidedaily.png"></p>
+        </div> 
+      </div> 
+    <div class="md:flex m-4">
+      <div class="md:w-1/2 border-4 mx-4 text-center">
         <button class="text-purple-400 underline pray-humbly mx-2">Pray Humbly</button>
+        <p><img src="prayhumbly.png"></p>
+        </div>
+      </div> 
+    </div>  
         `
-    //^^ need to add pictures and pretty formatting to buttons
+    //^^ need to add pretty formatting to buttons
 
       document.querySelector('.abide-daily').addEventListener('click',function(event) {
         document.location.href = 'bible_home.html'
