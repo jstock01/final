@@ -99,9 +99,10 @@ firebase.auth().onAuthStateChanged(async function(user) {
 //I commented worked but it stopped and IDK why. It's currently rendering as [object Object] 
 
 async function renderPrayer(userId, prayerId, username, title, description, completed, created) {
-    let date = Date.parse(created)
-    console.log(date)
-    // let secondsToDate = new Date(created*1000)
+    // let date = Date.parse(created)
+    // console.log(date)
+    let secondsToDate = new Date(created*1000)
+    let date = secondsToDate.toLocaleDateString("en-US")
     // let date = secondsToDate.toDate().toDateString()
       document.querySelector('.render-prayers').insertAdjacentHTML('beforeend', `
           <div class="prayer-${prayerId} md:mt-16 mt-8 space-y-8">
@@ -110,7 +111,7 @@ async function renderPrayer(userId, prayerId, username, title, description, comp
               </div>
   
               <div>
-                  <span class="text-m black">Prayer request submitted ${created}</span>
+                  <span class="text-m black">Prayer request submitted ${date}</span>
               </div>
   
               <div>
