@@ -48,7 +48,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       console.log(prayers)       
       for (let i=0; i<prayers.length; i++) {
         let prayer = prayers[i]
-        renderPrayer(prayer.userId, prayer.prayerId, prayer.username, prayer.title, prayer.description, prayer.completed, prayer.created)
+        renderPrayer(prayer.userId, prayer.prayerId, prayer.username, prayer.title, prayer.description, prayer.completed, prayer.created.seconds)
       }
 
       document.querySelector('form').addEventListener('submit', async function(event) {
@@ -99,7 +99,10 @@ firebase.auth().onAuthStateChanged(async function(user) {
 //I commented worked but it stopped and IDK why. It's currently rendering as [object Object] 
 
 async function renderPrayer(userId, prayerId, username, title, description, completed, created) {
-      //let date = created.toDate().toDateString()
+    let date = Date.parse(created)
+    console.log(date)
+    // let secondsToDate = new Date(created*1000)
+    // let date = secondsToDate.toDate().toDateString()
       document.querySelector('.render-prayers').insertAdjacentHTML('beforeend', `
           <div class="prayer-${prayerId} md:mt-16 mt-8 space-y-8">
               <div class="md:mx-0 mx-4">

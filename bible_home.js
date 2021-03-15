@@ -62,41 +62,49 @@ firebase.auth().onAuthStateChanged(async function(user) {
         
         let verseOutput = await response.json()
         console.log(verseOutput)
+
+        if (verseOutput.passages.length == 0) {
+
+          document.querySelector('.passage').innerHTML = `Error: could not find passage `
+
+        } else {
         
-        for (let i=0; i<verseOutput.passages.length;i++) {
-          document.querySelector('.passage').innerHTML = `
-            <div class="font-bold text-xl">${verseOutput.passage_meta[i].canonical}</div>
-            <div class="">${verseOutput.passages[i]}</div>
-          `
-        }
+          for (let i=0; i<verseOutput.passages.length;i++) {
+            document.querySelector('.passage').innerHTML = `
+              <div class="font-bold text-xl">${verseOutput.passage_meta[i].canonical}</div>
+              <div class="">${verseOutput.passages[i]}</div>
+            `
+          }
 
-        document.querySelector('.notes-submission-form').classList.remove("hidden")
+          document.querySelector('.notes-submission-form').classList.remove("hidden")
 
-        document.querySelector('#notes-submit-button').addEventListener('click', async function(event) {
+          document.querySelector('#notes-submit-button').addEventListener('click', async function(event) {
 
-          event.preventDefault()
+            event.preventDefault()
 
-          let userId = user.uid
-          let username = user.displayName
-          let reference = document.querySelector('#reference').value
-          let note = document.querySelector('#note').value  
-          let response = await fetch('/.netlify/functions/write_notes', {
-            method: 'POST',
-            body: JSON.stringify({
-              userId: userId,
-              username: username,
-              reference: reference,
-              note: note
+            let userId = user.uid
+            let username = user.displayName
+            let reference = document.querySelector('#reference').value
+            let note = document.querySelector('#note').value  
+            let response = await fetch('/.netlify/functions/write_notes', {
+              method: 'POST',
+              body: JSON.stringify({
+                userId: userId,
+                username: username,
+                reference: reference,
+                note: note
+              })
             })
+            
+            document.querySelector('.note-submitted-message').innerHTML = `You have submitted a note for ${reference}!`
+
+            document.querySelector('#form2').reset()
+
+            console.log(`Note submitted for ${reference}`)
+
           })
-          
-          document.querySelector('.note-submitted-message').innerHTML = `You have submitted a note for ${reference}!`
 
-          document.querySelector('#form2').reset()
-
-          console.log(`Note submitted for ${reference}`)
-
-        })
+        }
 
       })
       
