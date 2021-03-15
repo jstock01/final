@@ -17,7 +17,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       })
   
       document.querySelector('.navigation-buttons').innerHTML = `
-        <button class="text-red-400 underline abide-daily">Abide Daily</button>
+      <button class="text-purple-400 underline abide-daily mx-2"><img src="Bible-Purple.png"></button>
       `
       //^ need to add picture and make more nicely formatted to fit in with header
 

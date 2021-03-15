@@ -16,8 +16,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       })
   
       document.querySelector('.navigation-buttons').innerHTML = `
-      <button class="text-purple-400 underline pray-humbly mx-2">Pray Humbly</button>
-      <p><img src="prayhumbly.png"></p>
+      <button class="text-purple-400 underline pray-humbly mx-2"><img src="Prayer-Red.png"></button>
       `
   //^^ need to add pretty formatting to buttons
 
@@ -26,7 +25,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
     })
 
     document.querySelector('.home-button').innerHTML = `
-    <button class="text-purple-400 underline press-home mx-2 text-xl text-bold">Home</button>
+    <button class="text-purple-400 underline press-home mx-2 text-xl text-bold"><img src="Home-Red.png"></button>
     `
 //^^ need to add pictures and pretty formatting to buttons
 
@@ -36,7 +35,6 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
       document.querySelector('.bible-notes').innerHTML = `
         <button class="text-blue-500 underline bible-notes-link text-left">Bible Notes</button>
-        <p><img src="abidedaily.png"></p>
       `
       //^ need to be more nicely formatted to fit in with header
 
