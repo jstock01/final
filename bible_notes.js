@@ -7,7 +7,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       console.log('signed in')
 
       document.querySelector('.sign-in-or-sign-out').innerHTML = `
-        <button class="text-red-200 my-2 underline sign-out">Sign Out</button>
+        <button class="text-red-300 my-2 underline sign-out">Sign Out</button>
       `
       //^ needs to be more nicely formatted to fit in with header
   
@@ -18,7 +18,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       })
   
       document.querySelector('.navigation-buttons').innerHTML = `
-      <button class="text-purple-400 underline pray-humbly mx-2"><img src="Prayer-Red.png"></button>
+      <button class="text-purple-400 underline pray-humbly mx-2 my-1"><img src="Prayer-Red.png"></button>
       <button class="text-purple-400 underline abide-daily mx-2"><img src="Bible-Red.png"></button>
       `
     
