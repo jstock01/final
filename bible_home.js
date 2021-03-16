@@ -5,7 +5,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       console.log('signed in')
   
       document.querySelector('.sign-in-or-sign-out').innerHTML = `
-        <button class="text-red-200 my2 underline sign-out">Sign Out</button>
+        <button class="text-red-200 my-2 underline sign-out">Sign Out</button>
       `
       //^^ needs to be more nicely formatted to fit in with header
   
