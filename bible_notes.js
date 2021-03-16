@@ -81,14 +81,14 @@ firebase.auth().onAuthStateChanged(async function(user) {
 async function renderNote(userId, noteId, username, reference, noteContent, created){
   let date = created.toDate().toDateString()
   document.querySelector(".render-notes").insertAdjacentHTML('beforeend',`
-    <div class="note-${noteId}">
-    <div class="mx-4"> <span class="font-bold text-xl">${reference}</span>
+    <div class="note-${noteId} py-2 border-4 border-red-500 bg-red-100 opacity-80 mx-4 px-2 my-4 fill-current text-red-500">
+    <div> <span class="font-bold text-xl">${reference}</span>
     </div>
 
-    <div class="text-sm italic"> <span>${date}</span>
+    <div class="-my-2"> <span class="text-xs italic">${date}</span>
     </div>
 
-    <div> <span class="text-m black">${noteContent}</span>
+    <div class="my-2"> <span class="text-md">${noteContent}</span>
     </div>
   `)
 }
