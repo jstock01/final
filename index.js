@@ -18,14 +18,14 @@ firebase.auth().onAuthStateChanged(async function(user) {
     document.querySelector('.navigation-buttons').innerHTML = `
     <div class="flex text-center">
       <div class="w-1/2 flex m-4">
-        <div class="mx-auto border-4 mx-4">
-         <button class="text-red-400 underline abide-daily mx-2">Abide Daily</button>
+        <div class="mx-auto mx-4">
+         <button class="text-red-200 lg:font-bold abide-daily mx-2 text-lg lg:text-xl">Abide Daily</button>
          <p><img class="mx-auto" src="abidedaily.png"></p>
         </div> 
       </div> 
     <div class="w-1/2 flex m-4">
-      <div class="mx-auto border-4 mx-4">
-        <button class="text-purple-400 underline pray-humbly mx-2">Pray Humbly</button>
+      <div class="mx-auto mx-4">
+        <button class="text-purple-200 lg:font-bold italics pray-humbly mx-2 text-lg lg:text-xl">Pray Humbly</button>
         <p><img class="mx-auto" src="prayhumbly.png"></p>
         </div>
       </div> 

@@ -34,7 +34,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       })
 
       document.querySelector('.bible-notes').innerHTML = `
-        <button class="text-blue-500 underline bible-notes-link text-left">See your previously submitted Bible Notes</button>
+        <button class="text-red-500 underline bible-notes-link text-left">See your Bible Notes</button>
       `
       //^ need to be more nicely formatted to fit in with header
 
@@ -65,14 +65,16 @@ firebase.auth().onAuthStateChanged(async function(user) {
 
         if (verseOutput.passages.length == 0) {
 
-          document.querySelector('.passage').innerHTML = `Error: could not find passage `
+          document.querySelector('.passage').innerHTML = `<div class="py-4 px-4 font-bold italic text-xl text-red-900">Error: could not find passage</div>`
 
         } else {
         
           for (let i=0; i<verseOutput.passages.length;i++) {
             document.querySelector('.passage').innerHTML = `
+              <div class="py-2 border-4 border-red-500 bg-red-100 opacity-80 mx-4 px-2 my-4 fill-current text-red-500">
               <div class="font-bold text-xl">${verseOutput.passage_meta[i].canonical}</div>
               <div class="">${verseOutput.passages[i]}</div>
+              </div>
             `
           }
 

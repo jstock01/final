@@ -30,6 +30,15 @@ firebase.auth().onAuthStateChanged(async function(user) {
         document.location.href = 'prayer.html'
       })
 
+      document.querySelector('.home-button').innerHTML = `
+      <button class="text-purple-400 underline press-home mx-2 text-xl text-bold"><img src="Home-Red.png"></button>
+      `
+      //^^ need to add pictures and pretty formatting to buttons
+
+      document.querySelector('.press-home').addEventListener('click',function(event) {
+        document.location.href = 'index.html'
+      })
+
       let userId = user.uid
       console.log(userId)
 
