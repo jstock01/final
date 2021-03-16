@@ -6,7 +6,7 @@ firebase.auth().onAuthStateChanged(async function(user) {
       console.log('signed in')
   
       document.querySelector('.sign-in-or-sign-out').innerHTML = `
-        <button class="text-green-400 underline sign-out">Sign Out</button>
+        <button class="text-purple-200 underline sign-out">Sign Out</button>
       `
         
       document.querySelector('.sign-out').addEventListener('click', function(event) {
@@ -14,6 +14,15 @@ firebase.auth().onAuthStateChanged(async function(user) {
         firebase.auth().signOut()
         document.location.href = 'index.html'
       })
+
+      document.querySelector('.home-button').innerHTML = `
+      <button class="text-purple-400 underline press-home mx-2 text-xl text-bold"><img src="Home-purple.png"></button>
+      `
+      //^^ need to add pictures and pretty formatting to buttons
+
+      document.querySelector('.press-home').addEventListener('click',function(event) {
+        document.location.href = 'index.html'
+      }) 
   
       document.querySelector('.navigation-buttons').innerHTML = `
       <button class="text-purple-400 underline abide-daily mx-2"><img src="Bible-Purple.png"></button>
@@ -104,40 +113,34 @@ async function renderPrayer(userId, prayerId, username, title, description, comp
     let date = secondsToDate.toLocaleDateString("en-US")
     // let date = secondsToDate.toDate().toDateString()
       document.querySelector('.render-prayers').insertAdjacentHTML('beforeend', `
-          <div class="prayer-${prayerId} md:mt-16 mt-8 space-y-8">
-              <div class="md:mx-0 mx-4">
+          <div class="prayer-${prayerId} py-2 border-4 border-purple-500 bg-purple-100 opacity-80 mx-4 px-2 my-4 fill-current text-purple-500">
+              <div>
                   <span class="font-bold text-xl">${title}</span>
               </div>
   
               <div>
-                  <span class="text-m black">Prayer request submitted ${date}</span>
+                  <span class="text-md">${description}</span>
               </div>
   
-              <div>
-                  <span class="text-m black">${description}</span>
-              </div>
-  
-              <div class="text-3xl md:mx-0 mx-4">
-                  <button class="completed-button">✅</button>
-                  <button class="edit-button">✏</button>
+              <div class="text-3xl text-right">
                   <button class="delete-button">✖</button>
               </div>
           </div>
       `)
   
-      document.querySelector(`.prayer-${prayerId} .completed-button`).addEventListener('click', async function(event) {
-          event.preventDefault()
-          console.log(`prayer ${prayerId} completed!`)
+    //   document.querySelector(`.prayer-${prayerId} .completed-button`).addEventListener('click', async function(event) {
+    //       event.preventDefault()
+    //       console.log(`prayer ${prayerId} completed!`)
           
-          await db.collection('prayers').doc(prayerId).set({
-              userId: userId,
-              username: username, 
-              title: title,
-              description: description,
-              completed: "true", 
-              created: created
-          })    
-      })
+    //       await db.collection('prayers').doc(prayerId).set({
+    //           userId: userId,
+    //           username: username, 
+    //           title: title,
+    //           description: description,
+    //           completed: "true", 
+    //           created: created
+    //       })    
+    //   })
       
       document.querySelector(`.prayer-${prayerId} .delete-button`).addEventListener('click', async function(event) {
           event.preventDefault()
@@ -147,105 +150,98 @@ async function renderPrayer(userId, prayerId, username, title, description, comp
   
       })
       
-      document.querySelector(`.prayer-${prayerId} .edit-button`).addEventListener('click', async function(event) {
-          event.preventDefault()
-          document.querySelector(`.prayer-${prayerId}`).innerHTML = `
-          <div>
-              <form class="w-full mt-8 edit-prayer-${prayerId}">
-                  <div class="md:mx-0 mx-4">
-                  <span class="font-bold text-xl">Title:</span>
-                  </div>
-                  <input type="text" id="edit-title" name="edit-title" placeholder="${title}" class="my-2 p-2 w-64 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">
-                  <div class="md:mx-0 mx-4">
-                  <span class="font-bold text-xl">Description:</span>
-                  </div>                
-                  <input type="text" id="edit-description" name="edit-description" placeholder="${description}" class="my-2 p-2 w-64 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">
-                  <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl submit-edit-${prayerId}">Edit</button>
-              </form>
-          </div>
-          `
+    //   document.querySelector(`.prayer-${prayerId} .edit-button`).addEventListener('click', async function(event) {
+    //       event.preventDefault()
+    //       document.querySelector(`.prayer-${prayerId}`).innerHTML = `
+    //       <div>
+    //           <form class="w-full mt-8 edit-prayer-${prayerId}">
+    //               <div class="md:mx-0 mx-4">
+    //               <span class="font-bold text-xl">Title:</span>
+    //               </div>
+    //               <input type="text" id="edit-title" name="edit-title" placeholder="replace - ${title}" class="my-2 p-2 w-64 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+    //               <div class="md:mx-0 mx-4">
+    //               <span class="font-bold text-xl">Description:</span>
+    //               </div>                
+    //               <input type="text" id="edit-description" name="edit-description" placeholder="replace - ${description}" class="my-2 p-2 w-64 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+    //               <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl submit-edit-${prayerId}">Edit</button>
+    //           </form>
+    //       </div>
+    //       `
   
-          document.querySelector(`.edit-prayer-${prayerId}`).addEventListener('submit', async function(event) {
+    //       document.querySelector(`.edit-prayer-${prayerId}`).addEventListener('submit', async function(event) {
           
-              event.preventDefault()
+    //           event.preventDefault()
               
-              let editedTitle = document.querySelector('#edit-title').value
-              let editedDescription = document.querySelector('#edit-description').value
-              let docRef = await db.collection('prayers').doc(prayerId).set({ 
-                  userId: userId,
-                  username: username, 
-                  title: editedTitle,
-                  description: editedDescription,
-                  completed: completed, 
-                  created: created,
-                  edited: firebase.firestore.FieldValue.serverTimestamp()
-              })
+    //           let editedTitle = document.querySelector('#edit-title').value
+    //           let editedDescription = document.querySelector('#edit-description').value
+    //           let docRef = await db.collection('prayers').doc(prayerId).set({ 
+    //               userId: userId,
+    //               username: username, 
+    //               title: editedTitle,
+    //               description: editedDescription,
+    //               completed: completed, 
+    //               created: created,
+    //               edited: firebase.firestore.FieldValue.serverTimestamp()
+    //           })
   
-              document.querySelector(`.edit-prayer-${prayerId}`).classList.add("hidden")
+    //           document.querySelector(`.edit-prayer-${prayerId}`).classList.add("hidden")
               
-              document.querySelector(`.prayer-${prayerId}`).insertAdjacentHTML('beforeend', `
-              <div class="prayer-${prayerId} md:mt-16 mt-8 space-y-8">
-                  <div class="md:mx-0 mx-4">
-                      <span class="font-bold text-xl">${editedTitle}</span>
-                  </div>
+    //           document.querySelector(`.prayer-${prayerId}`).insertAdjacentHTML('beforeend', `
+    //           <div class="prayer-${prayerId} py-2 border-4 border-purple-500 bg-purple-100 opacity-80 mx-4 px-2 my-4 fill-current text-purple-500">
+    //               <div>
+    //                   <span class="font-bold text-xl">${editedTitle}</span>
+    //               </div>
   
-                  <div>
-                      <span class="text-m black">Prayer request submitted ${created}</span>
-                  </div>
+    //               <div>
+    //                   <span class="text-md">${editedDescription}</span>
+    //               </div>
   
-                  <div>
-                      <span class="text-m black">${editedDescription}</span>
-                  </div>
-  
-                  <div class="text-3xl md:mx-0 mx-4">
-                      <button class="completed-button">✅</button>
-                      <button class="edit-button">✏</button>
-                      <button class="delete-button">✖</button>
-                  </div>
-              </div>
-              `)
-          })
-      }) 
+    //               <div class="text-3xl mx-4">
+    //                   <button class="delete-button">✖</button>
+    //               </div>
+    //           </div>
+    //           `)
+    //       })
+    //   }) 
       
   }
 
 async function renderNewPrayer(userId, prayerId, username, title, description, completed, created) {
 //    let date = created.toDate().toDateString()
+    let secondsToDate = new Date(created*1000)
+    let date = secondsToDate.toLocaleDateString("en-US")
     document.querySelector('.render-prayers').insertAdjacentHTML('afterbegin', `
-        <div class="prayer-${prayerId} md:mt-16 mt-8 space-y-8">
-            <div class="md:mx-0 mx-4">
-                <span class="font-bold text-xl">${title}</span>
+        <div class="prayer-${prayerId} py-2 border-4 border-purple-500 bg-purple-100 opacity-80 mx-4 px-2 my-4 fill-current text-purple-500">
+            <div><span class="font-bold text-xl">${title}</span>
             </div>
 
-            <div>
-                <span class="text-m black">Prayer request submitted ${created}</span>
+            <div><span class="text-md">${description}</span>
             </div>
 
-            <div>
-                <span class="text-m black">${description}</span>
-            </div>
-
-            <div class="text-3xl md:mx-0 mx-4">
-                <button class="completed-button">✅</button>
-                <button class="edit-button">✏</button>
+            <div class="text-3xl text-right">
                 <button class="delete-button">✖</button>
             </div>
         </div>
     `)
 
-    document.querySelector(`.prayer-${prayerId} .completed-button`).addEventListener('click', async function(event) {
-        event.preventDefault()
-        console.log(`prayer ${prayerId} completed!`)
+//<div>
+//<span class="text-m black">Prayer request submitted ${date}</span>
+//</div>
+
+
+    // document.querySelector(`.prayer-${prayerId} .completed-button`).addEventListener('click', async function(event) {
+    //     event.preventDefault()
+    //     console.log(`prayer ${prayerId} completed!`)
         
-        await db.collection('prayers').doc(prayerId).set({
-            userId: userId,
-            username: username, 
-            title: title,
-            description: description,
-            completed: "true", 
-            created: created
-        })    
-    })
+    //     await db.collection('prayers').doc(prayerId).set({
+    //         userId: userId,
+    //         username: username, 
+    //         title: title,
+    //         description: description,
+    //         completed: "true", 
+    //         created: created
+    //     })    
+    // })
     
     document.querySelector(`.prayer-${prayerId} .delete-button`).addEventListener('click', async function(event) {
         event.preventDefault()
@@ -255,65 +251,59 @@ async function renderNewPrayer(userId, prayerId, username, title, description, c
 
     })
     
-    document.querySelector(`.prayer-${prayerId} .edit-button`).addEventListener('click', async function(event) {
-        event.preventDefault()
-        document.querySelector(`.prayer-${prayerId}`).innerHTML = `
-        <div>
-            <form class="w-full mt-8 edit-prayer-${prayerId}">
-                <div class="md:mx-0 mx-4">
-                <span class="font-bold text-xl">Title:</span>
-                </div>
-                <input type="text" id="edit-title" name="edit-title" placeholder="${title}" class="my-2 p-2 w-64 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">
-                <div class="md:mx-0 mx-4">
-                <span class="font-bold text-xl">Description:</span>
-                </div>                
-                <input type="text" id="edit-description" name="edit-description" placeholder="${description}" class="my-2 p-2 w-64 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">
-                <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl submit-edit-${prayerId}">Edit</button>
-            </form>
-        </div>
-        `
+    // document.querySelector(`.prayer-${prayerId} .edit-button`).addEventListener('click', async function(event) {
+    //     event.preventDefault()
+    //     document.querySelector(`.prayer-${prayerId}`).innerHTML = `
+    //     <div>
+    //         <form class="w-full mt-8 edit-prayer-${prayerId}">
+    //             <div class="md:mx-0 mx-4">
+    //             <span class="font-bold text-xl">Title:</span>
+    //             </div>
+    //             <input type="text" id="edit-title" name="edit-title" placeholder="replace - ${title}" class="my-2 p-2 w-64 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+    //             <div class="md:mx-0 mx-4">
+    //             <span class="font-bold text-xl">Description:</span>
+    //             </div>                
+    //             <input type="text" id="edit-description" name="edit-description" placeholder="replace - ${description}" class="my-2 p-2 w-64 border border-gray-400 rounded shadow-xl focus:outline-none focus:ring-purple-500 focus:border-purple-500">
+    //             <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl submit-edit-${prayerId}">Edit</button>
+    //         </form>
+    //     </div>
+    //     `
 
-        document.querySelector(`.edit-prayer-${prayerId}`).addEventListener('submit', async function(event) {
+    //     document.querySelector(`.edit-prayer-${prayerId}`).addEventListener('submit', async function(event) {
         
-            event.preventDefault()
+    //         event.preventDefault()
             
-            let editedTitle = document.querySelector('#edit-title').value
-            let editedDescription = document.querySelector('#edit-description').value
-            let docRef = await db.collection('prayers').doc(prayerId).set({ 
-                userId: userId,
-                username: username, 
-                title: editedTitle,
-                description: editedDescription,
-                completed: completed, 
-                created: created,
-                edited: firebase.firestore.FieldValue.serverTimestamp()
-            })
+    //         let editedTitle = document.querySelector('#edit-title').value
+    //         let editedDescription = document.querySelector('#edit-description').value
+    //         let docRef = await db.collection('prayers').doc(prayerId).set({ 
+    //             userId: userId,
+    //             username: username, 
+    //             title: editedTitle,
+    //             description: editedDescription,
+    //             completed: completed, 
+    //             created: created,
+    //             edited: firebase.firestore.FieldValue.serverTimestamp()
+    //         })
 
-            document.querySelector(`.edit-prayer-${prayerId}`).classList.add("hidden")
+    //         document.querySelector(`.edit-prayer-${prayerId}`).classList.add("hidden")
             
-            document.querySelector(`.prayer-${prayerId}`).insertAdjacentHTML('beforeend', `
-            <div class="prayer-${prayerId} md:mt-16 mt-8 space-y-8">
-                <div class="md:mx-0 mx-4">
-                    <span class="font-bold text-xl">${editedTitle}</span>
-                </div>
+    //         document.querySelector(`.prayer-${prayerId}`).insertAdjacentHTML('beforeend', `
+    //         <div class="prayer-${prayerId} py-2 border-4 border-purple-500 bg-purple-100 opacity-80 mx-4 px-2 my-4 fill-current text-purple-500">
+    //             <div>
+    //                 <span class="font-bold text-xl">${editedTitle}</span>
+    //             </div>
 
-                <div>
-                    <span class="text-m black">Prayer request submitted ${created}</span>
-                </div>
+    //             <div>
+    //                 <span class="text-md">${editedDescription}</span>
+    //             </div>
 
-                <div>
-                    <span class="text-m black">${editedDescription}</span>
-                </div>
-
-                <div class="text-3xl md:mx-0 mx-4">
-                    <button class="completed-button">✅</button>
-                    <button class="edit-button">✏</button>
-                    <button class="delete-button">✖</button>
-                </div>
-            </div>
-            `)
-        })
-    }) 
+    //             <div class="text-3xl mx-4">
+    //                 <button class="delete-button">✖</button>
+    //             </div>
+    //         </div>
+    //         `)
+    //     })
+    // }) 
     
 }
   

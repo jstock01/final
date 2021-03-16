@@ -1,6 +1,6 @@
 # Final Project Template
 
-Netlify URL:
+Netlify URL: https://boring-ardinghelli-39d8b7.netlify.app/
 
 Note: please install and run a chrome plugin that disables CORS while you run this page (like this: https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=en)
 
